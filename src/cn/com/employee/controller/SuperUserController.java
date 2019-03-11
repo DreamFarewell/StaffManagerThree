@@ -46,10 +46,24 @@ public class SuperUserController {
 		}
 	}
 	/**
+	 * 修改单个用户提交查找
+	 */
+	@RequestMapping("/updateUserPage")
+	public String updateUserPage(Model model,@RequestParam("id")Integer id) throws Exception {
+		UserCustom userCustom = userService.findUserById(id);
+		model.addAttribute("userCustom", userCustom);
+		return "updateUser";
+	}
+	/**
 	 * 更新用户
 	 */
 	@RequestMapping("/updateUser")
-	public String updateUser() throws Exception {
+	public String updateUser(@RequestParam("id")Integer id,@RequestParam("user")String user,@RequestParam("password")String password,@RequestParam("type")String type) throws Exception {
+		UserCustom userCustom = new UserCustom();
+			userCustom.setUser(user);
+			userCustom.setPassword(password);
+			userCustom.setUserType(type);
+			userService.updateUser(id, userCustom);
 		return "success";
 	}
 }

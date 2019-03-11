@@ -12,6 +12,10 @@ public interface UserMapper {
 	 */
 	public UserCustom getUser(@Param("user")String user) throws Exception;
 	/**
+	 * 根据主键查询用户
+	 */
+	public UserCustom findUserById(@Param("id")Integer id) throws Exception;
+	/**
 	 * 获得用户列表
 	 */
 	public List<UserCustom> getUserList() throws Exception;
@@ -22,7 +26,7 @@ public interface UserMapper {
 	 */
 	public void insertUser(UserCustom user) throws Exception;
 	/**
-	 * 修改密码
+	 * 修改用户密码
 	 */
 	public void updatePassword(@Param("user")String user,@Param("password")String password) throws Exception;
 	/**
@@ -31,4 +35,11 @@ public interface UserMapper {
 	 * @throws Exception
 	 */
 	public void deleteUser(@Param("user")String user,@Param("userType")String userType) throws Exception;
+	/**
+	 * 更新用户
+	 * @param id
+	 * @param userCustom
+	 * @throws Exception
+	 */
+	public void updateUser(@Param("id")Integer id, @Param("userCustom")UserCustom userCustom) throws Exception;
 }

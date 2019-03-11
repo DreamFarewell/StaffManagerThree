@@ -13,6 +13,7 @@ package cn.com.employee.po;
  *
  */
 public class User{
+	private Integer id;
 	private String user;
 	private String password;
 	private String userType;
@@ -33,5 +34,11 @@ public class User{
 	}
 	public void setUserType(String userType) {
 		this.userType = userType;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
 	}
 }

@@ -58,7 +58,7 @@
 						<td>${list.userType }</td>
 						<td align="center" class="td_style"><a
 									class="a_button_update"
-									href="${pageContext.request.contextPath }/super/updateUser.action?username=${list.user}&type=${list.userType}">修改</a></td>
+									href="${pageContext.request.contextPath }/super/updateUserPage.action?id=${list.id}">修改</a></td>
 								<td align="center" class="td_style_delete"><a
 									class="a_button_delete" onclick="return deleteEmployeeOne()"
 									href="${pageContext.request.contextPath }/super/deleteUser.action?username=${list.user}&type=${list.userType}">删除</a></td>
