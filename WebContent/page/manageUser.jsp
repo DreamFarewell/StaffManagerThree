@@ -5,9 +5,38 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/table_style.css"
+	type="text/css" />
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/a_button_style.css"
+	type="text/css" />
 <style type="text/css">
+body {
+	background-image:
+		url("${pageContext.request.contextPath}/images/bg.png");
+	background-position: center center;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: relative;
+}
 .a_index {
 	text-decoration: none;
+}
+.page_b {
+	font: bold 11px Arial;
+	text-decoration: none;
+	background-color: #EEEEEE;
+	color: #333333;
+	padding: 2px 6px 2px 6px;
+	border-top: 1px solid #CCCCCC;
+	border-right: 1px solid #333333;
+	border-bottom: 1px solid #333333;
+	border-left: 1px solid #CCCCCC;
+}
+.page_log {
+	padding-left: 10%;
 }
 </style>
 <title>管理用户</title>
@@ -44,18 +73,18 @@
 		action="${pageContext.request.contextPath }/super/manageUser.action"
 		method="post">
 		<c:if test="${not empty userList }">
-			<table>
-				<tr>
-					<td><input name="all" type="checkbox" /></td>
-					<td>用户</td>
-					<td>类型</td>
-					<td colspan="2">操作</td>
+			<div align="center">
+			<table  class="table_style" width="40%" cellspacing="1"
+						cellpadding="0">
+				<tr class="tr_h_style">
+					<td class="td_style">用户</td>
+					<td class="td_style">类型</td>
+					<td class="td_style" colspan="2">操作</td>
 				</tr>
 				<c:forEach items="${userList }" var="list">
-					<tr>
-						<td><input name="idx" type="checkbox"></td>
-						<td>${list.user }</td>
-						<td>${list.userType }</td>
+					<tr class="tr_h_style" >
+						<td align="center" class="td_style">${list.user }</td>
+						<td align="center" class="td_style">${list.userType }</td>
 						<td align="center" class="td_style"><a
 									class="a_button_update"
 									href="${pageContext.request.contextPath }/super/updateUserPage.action?id=${list.id}">修改</a></td>
@@ -65,6 +94,7 @@
 					</tr>
 				</c:forEach>
 			</table>
+			</div>
 		</c:if>
 	</form>
 </c:if>
