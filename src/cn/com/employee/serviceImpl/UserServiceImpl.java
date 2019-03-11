@@ -49,8 +49,19 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	public void updateUser(Integer id, UserCustom userCustom) throws Exception {
-		// TODO Auto-generated method stub
-		
+		if(id>0 && userCustom!=null) {
+			userMapper.updateUser(id, userCustom);
+		}
 	}
-	
+	/**
+	 * 按照主键查询用户
+	 */
+	@Override
+	public UserCustom findUserById(Integer id) throws Exception {
+		if(id>0) {
+			UserCustom userCustom = userMapper.findUserById(id);
+			return userCustom;
+		}
+		return null;
+	}
 }
