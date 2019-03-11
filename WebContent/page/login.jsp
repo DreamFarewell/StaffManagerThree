@@ -7,9 +7,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <style>
 form {
-	background-color: #016AA9;
+	background-color: #DFF2FE;
 	height: auto;
 	width: 350px;
+	margin-top: 5%;
 }
 
 body {
@@ -49,11 +50,11 @@ body {
 			action="${pageContext.request.contextPath }/login.action"
 			method="post">
 			<div align="center" style="padding-top: 5px; padding-bottom: 0px">
-				<select style="margin-left: 1.5%" name="userType"><option
+				<font color="black"
+					size="1px">(默认类型为管理员)</font><br /> <select style="margin-left: 1.5%" name="userType"><option
 						value="ordinary">选择用户类型</option>
 					<option value="ordinary">管理员</option>
-					<option value="super">超级管理员</option></select><br /> <font color="yellow"
-					size="1px">(默认类型为管理员)</font>
+					<option value="super">超级管理员</option></select>
 			</div>
 			<br /> 账号：<input type="text" style="width: 150px; height: 15px;"
 				name="user" value="${user }"/><br /> <br /> 密码：<input type="password"

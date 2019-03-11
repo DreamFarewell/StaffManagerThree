@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import cn.com.employee.mapper.UserMapper;
-import cn.com.employee.po.User;
 import cn.com.employee.po.UserCustom;
 import cn.com.employee.service.UserService;
 
@@ -18,15 +17,19 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean getUser(UserCustom user) throws Exception {
 		if(user!=null) {
-			//从数据库获得用户信息
-			User usr = userMapper.getUser(user.getUser());
-			//判断页面传入用户信息是否正确
-			if(user.getUser().equals(usr.getUser()) && user.getPassword().equals(usr.getPassword()) && user.getUserType().equals(usr.getUserType())) {
-				return true;
+			//判断用户是否存在于数据库中
+			if(userMapper.judgeUser(user.getUser(), user.getUserType())>0) {
+				//数据库中存在用户信息，则从数据库获得用户信息
+				UserCustom usr = userMapper.getUser(user.getUser());
+				//判断页面传入用户信息是否正确
+				if(user.getUser().equals(usr.getUser()) && user.getPassword().equals(usr.getPassword()) && user.getUserType().equals(usr.getUserType())) {
+					return true;
+				}
+				return false;
+			}
 			}else {
 				return false;
 			}
-		}
 		return false;
 	}
 	/**
@@ -85,9 +88,13 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean judgePassword(UserCustom userCustom) throws Exception {
 		if(userCustom!=null) {
-			UserCustom user = userMapper.getUser(userCustom.getUser());
-			if(user.getUser().equals(userCustom.getUser()) && user.getUserType().equals(userCustom.getUserType()) && !user.getPassword().equals(userCustom.getPassword())) {
-				return true;
+			if(userMapper.judgeUser(userCustom.getUser(), userCustom.getUserType())>1) {
+				UserCustom user = userMapper.getUser(userCustom.getUser());
+				if(user.getUser().equals(userCustom.getUser()) && user.getUserType().equals(userCustom.getUserType()) && !user.getPassword().equals(userCustom.getPassword())) {
+					return true;
+				}
+			}else {
+				return false;
 			}
 		}
 		return false;

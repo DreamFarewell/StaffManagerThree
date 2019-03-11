@@ -32,7 +32,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		if (employeeinformationCustom.getName() != null && employeeinformationCustom.getAge() != null
 				&& employeeinformationCustom.getSex() != null) {
 			employeeinformationMapper.insert(employeeinformationCustom);
-		}else {}
+		}
 	}
 
 	/**
