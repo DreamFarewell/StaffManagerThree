@@ -15,6 +15,13 @@ public class PageJumpController {
 		return "redirect:/employee/employeeAllSubmit.action";
 	}
 	/**
+	 * 转向manageUser页面
+	 */
+	@RequestMapping("/home")
+	public String home() throws Exception {
+		return "redirect:/super/manageUser.action";
+	}
+	/**
 	 * 转向query页面
 	 * @return
 	 * @throws Exception

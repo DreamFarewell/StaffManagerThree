@@ -8,13 +8,20 @@
  */
 package cn.com.employee.po;
 
+import javax.validation.constraints.NotNull;
+
+import cn.com.employee.validation.ValidGroup4;
+import cn.com.employee.validation.ValidGroup5;
+
 /**
  * @author 胡金光
  *
  */
 public class User{
 	private Integer id;
+	@NotNull(message="{user.user.isNull.message}",groups= {ValidGroup4.class})
 	private String user;
+	@NotNull(message="{user.password.isNull.message}",groups= {ValidGroup5.class})
 	private String password;
 	private String userType;
 	public String getUser() {

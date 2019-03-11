@@ -90,7 +90,7 @@ form {
 </head>
 <body>
 	<!-- <div align="right"><a href="index.jsp">首页</a>&nbsp;<a href="login.jsp">退出系统</a></div> -->
-	<c:if test="">
+	<c:if test="${userType=='ordinary' }">
 	<div>
 		<img src="${pageContext.request.contextPath}/images/logo.png">
 		<div class="page_log">

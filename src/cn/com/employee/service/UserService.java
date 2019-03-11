@@ -15,4 +15,6 @@ public interface UserService {
 	void deleteUser(String user,String userType) throws Exception;
 	//更新用户
 	void updateUser(Integer id,UserCustom userCustom) throws Exception;
+	//新建用户
+	void insertUser(UserCustom userCustom) throws Exception;
 }

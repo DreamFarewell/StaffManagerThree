@@ -5,11 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import cn.com.employee.po.UserCustom;
 import cn.com.employee.service.UserService;
+import cn.com.employee.validation.UserValidGroupSequence;
 
 @Controller
 @RequestMapping("/super")
@@ -60,10 +62,30 @@ public class SuperUserController {
 	@RequestMapping("/updateUser")
 	public String updateUser(@RequestParam("id")Integer id,@RequestParam("user")String user,@RequestParam("password")String password,@RequestParam("type")String type) throws Exception {
 		UserCustom userCustom = new UserCustom();
-			userCustom.setUser(user);
-			userCustom.setPassword(password);
-			userCustom.setUserType(type);
-			userService.updateUser(id, userCustom);
+		userCustom.setUser(user);
+		userCustom.setPassword(password);
+		userCustom.setUserType(type);
+		userService.updateUser(id, userCustom);
 		return "success";
+	}
+	/**
+	 * 添加新用户页面
+	 */
+	@RequestMapping("/insertUserPage")
+	public String insertUserPage() throws Exception {
+			return "insertUser";
+	}
+	/**
+	 * 添加新用户提交
+	 */
+	@RequestMapping("/insertUser")
+	public String insertUser(@Validated(value= {UserValidGroupSequence.class})UserCustom userCustom,@RequestParam("type")String userType) throws Exception {
+		if(userCustom!=null) {
+			userCustom.setUserType(userType);
+			userService.insertUser(userCustom);
+			return "success";
+		}else {
+			return "error";
+		}
 	}
 }

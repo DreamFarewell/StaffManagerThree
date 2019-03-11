@@ -14,13 +14,9 @@
 		SELECT * From user WHERE id=#{id}
 	</select>
 	<!-- 创建新用户 -->
-	<insert parameterType="cn.com.employee.po.UserCustom" id="insertUser">
-		INSERT INTO user (user,password,userType) VALUES (#{user},#{password},#{userType})
+	<insert id="insertUser">
+		INSERT INTO user (user,password,userType) VALUES (#{userCustom.user},#{userCustom.password},#{userCustom.userType})
 	</insert>
-	<!-- 更改密码 -->
-	<update id="updatePassword">
-		UPDATE user SET password=#{password} WHERE user=#{user} and userType=#{userType}
-	</update>
 	<!-- 修改用户信息 -->
 	<update id="updateUser">
 		UPDATE user SET 

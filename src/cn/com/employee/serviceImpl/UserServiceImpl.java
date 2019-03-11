@@ -64,4 +64,9 @@ public class UserServiceImpl implements UserService {
 		}
 		return null;
 	}
+	@Override
+	public void insertUser(UserCustom userCustom) throws Exception {
+		if(userCustom!=null)
+		userMapper.insertUser(userCustom);
+	}
 }

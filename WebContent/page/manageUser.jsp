@@ -39,6 +39,19 @@ body {
 	padding-left: 10%;
 }
 </style>
+<script type="text/javascript">
+function deleteEmployeeOne() {
+	var msg = confirm("确定删除？")
+	if (msg) {
+		return true;
+	}
+	return false;
+}
+function insertUser() {
+	document.userForm.action = "${pageContext.request.contextPath}/super/insertUserPage.action"
+	document.userForm.submit();
+}
+</script>
 <title>管理用户</title>
 </head>
 <body>
@@ -69,10 +82,13 @@ body {
 			</c:if>
 		</div>
 	</div>
-	<form
+	<form name="userForm"
 		action="${pageContext.request.contextPath }/super/manageUser.action"
 		method="post">
 		<c:if test="${not empty userList }">
+			<div align="right" style="padding-right: 30.1%;padding-bottom: 3px;">
+			<button class="page_b" onclick="insertUser()">添加新用户</button>
+			</div>
 			<div align="center">
 			<table  class="table_style" width="40%" cellspacing="1"
 						cellpadding="0">

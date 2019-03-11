@@ -24,7 +24,7 @@ public interface UserMapper {
 	 * @param user
 	 * @throws Exception
 	 */
-	public void insertUser(UserCustom user) throws Exception;
+	public void insertUser(@Param("userCustom")UserCustom user) throws Exception;
 	/**
 	 * 修改用户密码
 	 */
