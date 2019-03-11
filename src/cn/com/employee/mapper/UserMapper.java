@@ -12,6 +12,10 @@ public interface UserMapper {
 	 */
 	public UserCustom getUser(@Param("user")String user) throws Exception;
 	/**
+	 * 查询数据库中是否存在该用户
+	 */
+	public Integer judgeUser(@Param("user")String user,@Param("userType")String userType) throws Exception;
+	/**
 	 * 根据主键查询用户
 	 */
 	public UserCustom findUserById(@Param("id")Integer id) throws Exception;

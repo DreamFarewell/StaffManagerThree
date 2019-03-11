@@ -3,7 +3,11 @@
 <mapper namespace="cn.com.employee.mapper.UserMapper">
 	<!-- 获得用户信息 -->
 	<select id="getUser" resultType="cn.com.employee.po.UserCustom">
-		SELECT * FROM user where user=#{user}
+		SELECT * FROM user WHERE user=#{user}
+	</select>
+	<!-- 用于判断用户是否存在 -->
+	<select id="judgeUser" resultType="java.lang.Integer">
+		SELECT count(*) FROM user WHERE user=#{user} and userType=#{userType}
 	</select>
 	<!-- 获得用户列表 -->
 	<select id="getUserList" resultType="cn.com.employee.po.UserCustom">

@@ -5,13 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import cn.com.employee.po.UserCustom;
 import cn.com.employee.service.UserService;
-import cn.com.employee.validation.UserValidGroupSequence;
 
 @Controller
 @RequestMapping("/super")
@@ -73,19 +71,28 @@ public class SuperUserController {
 	 */
 	@RequestMapping("/insertUserPage")
 	public String insertUserPage() throws Exception {
-			return "insertUser";
+		return "insertUser";
 	}
 	/**
 	 * 添加新用户提交
 	 */
 	@RequestMapping("/insertUser")
-	public String insertUser(@Validated(value= {UserValidGroupSequence.class})UserCustom userCustom,@RequestParam("type")String userType) throws Exception {
-		if(userCustom!=null) {
+	public String insertUser(Model model,String user,String password,@RequestParam("type")String userType) throws Exception {
+		/*
+		 * 判断用户是否存在于数据库
+		 */
+		if(userService.judge(user, userType)) {
+			UserCustom userCustom = new UserCustom();
+			userCustom.setUser(user);
+			userCustom.setPassword(password);
 			userCustom.setUserType(userType);
 			userService.insertUser(userCustom);
 			return "success";
 		}else {
-			return "error";
+			model.addAttribute("user", user);
+			model.addAttribute("password", password);
+			model.addAttribute("lose", "用户名已存在");
+			return "insertUser";
 		}
 	}
 }

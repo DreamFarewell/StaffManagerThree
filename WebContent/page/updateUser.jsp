@@ -66,6 +66,10 @@ form {
 	border-left: 1px solid #CCCCCC;
 }
 
+.input_bg {
+	background-color: transparent;
+}
+
 .td {
 	text-align: right;
 }
@@ -126,12 +130,12 @@ function home() {
 					<table class="table_style">
 						<tr class="tr_d_style">
 							<td class="td_style">用户名:</td>
-							<td class="td"><input type="text" class="input_text"
+							<td class="td"><input type="text" class="input_bg"
 								name="user" value="${userCustom.user }" /></td>
 						</tr>
 						<tr class="tr_d_style">
 							<td class="td_style">密 码:</td>
-							<td class="td"><input class="input_text" type="text"
+							<td class="td"><input class="input_bg" type="text"
 								name="password" value="${userCustom.password }" /></td>
 						</tr>
 						<tr class="tr_d_style">

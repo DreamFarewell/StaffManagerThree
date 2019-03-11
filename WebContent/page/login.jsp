@@ -52,17 +52,16 @@ body {
 				<select style="margin-left: 1.5%" name="userType"><option
 						value="ordinary">选择用户类型</option>
 					<option value="ordinary">管理员</option>
-					<option value="super">超级管理员</option></select><br />
-				<font color="yellow" size="1px">(默认类型为管理员)</font>
+					<option value="super">超级管理员</option></select><br /> <font color="yellow"
+					size="1px">(默认类型为管理员)</font>
 			</div>
 			<br /> 账号：<input type="text" style="width: 150px; height: 15px;"
-				name="user" /><br /> <br /> 密码：<input type="password"
-				style="width: 150px; height: 15px;" name="password" /><br />
-			<font color="red" size="2"> <c:if test="${lose!=null }">
+				name="user" value="${user }"/><br /> <br /> 密码：<input type="password"
+				style="width: 150px; height: 15px;" name="password" value="${password }"/><br /> <font
+				color="red" size="2"> <c:if test="${lose!=null }">
 						${lose }
-					</c:if>
-			</font>
-			<br /> <a onClick="valid()"><img width="auto" height="auto"
+					</c:if> <span id="errorMsg"></span>
+			</font> <br /> <a onClick="valid()"><img width="auto" height="auto"
 				alt="登录" src="/pic/log.gif"></a><br />
 		</form>
 	</center>

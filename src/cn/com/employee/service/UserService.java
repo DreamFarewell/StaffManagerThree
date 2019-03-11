@@ -17,4 +17,8 @@ public interface UserService {
 	void updateUser(Integer id,UserCustom userCustom) throws Exception;
 	//新建用户
 	void insertUser(UserCustom userCustom) throws Exception;
+	//判断用户是否存在于数据库
+	boolean judge(String user,String userType) throws Exception;
+	//判断用户密码是否正确
+	boolean judgePassword(UserCustom userCustom) throws Exception;
 }

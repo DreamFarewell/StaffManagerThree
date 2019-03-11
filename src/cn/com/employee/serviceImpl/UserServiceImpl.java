@@ -64,9 +64,32 @@ public class UserServiceImpl implements UserService {
 		}
 		return null;
 	}
+	/**
+	 * 新建用户
+	 */
 	@Override
 	public void insertUser(UserCustom userCustom) throws Exception {
 		if(userCustom!=null)
 		userMapper.insertUser(userCustom);
+	}
+	/**
+	 * 判断用户是否存在
+	 */
+	@Override
+	public boolean judge(String user, String userType) throws Exception {
+		return userMapper.judgeUser(user, userType) > 0 ? false : true;
+	}
+	/**
+	 * 判断密码是否正确
+	 */
+	@Override
+	public boolean judgePassword(UserCustom userCustom) throws Exception {
+		if(userCustom!=null) {
+			UserCustom user = userMapper.getUser(userCustom.getUser());
+			if(user.getUser().equals(userCustom.getUser()) && user.getUserType().equals(userCustom.getUserType()) && !user.getPassword().equals(userCustom.getPassword())) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

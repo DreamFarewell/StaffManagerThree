@@ -30,29 +30,38 @@ public class LoginController {
 	@RequestMapping("/login")
 	public String login(Model model,HttpSession session ,String userType, String user, String password) throws Exception {
 		//判断页面传过来的值是否为空
-		UserCustom uc = new UserCustom();
+			UserCustom uc = new UserCustom();
 			uc.setUser(user);
 			uc.setPassword(password);
 			uc.setUserType(userType);
-			
-			boolean pd = userService.getUser(uc);
-			//如果信息和数据库中的匹配,则进行跳转
-			if(pd) {
-				//如果是普通管理员用户，则跳转到相应的页面；如果是超级管理员用户，则亦然
+			//如果信息和数据库中的匹配,则向下执行
+			if(userService.getUser(uc)) {
 				if(userType.replace("", "").equals("ordinary")) {
+					/*如果是普通管理员用户，则跳转到普通管理员用户权限所在范围的主页*/
 					session.setAttribute("username", uc.getUser());
 					session.setAttribute("userType", uc.getUserType());
 					return "redirect:/employee/employeeAllSubmit.action";
 				}else if(userType.replace("", "").equals("super")) {
+					/*如果是超级管理员用户，则跳转到超级管理员用户权限用户所在范围的主页*/
 					session.setAttribute("username", uc.getUser());
 					session.setAttribute("userType", uc.getUserType());
 					return "redirect:/super/manageUser.action";
 				}
+			}else if(userService.judgePassword(uc)){
+				/*如果只是用户的密码不匹配，则把错误信息和回显数据传回到登录页面*/
+				model.addAttribute("user", user);
+				model.addAttribute("password",password);
+				model.addAttribute("userType", userType);
+				model.addAttribute("lose", "密码不正确");
+				return "login";
 			}else {
+				/*如果和数据库中的数据完全不匹配，则把错误信息和回显数据传回到登录页面*/
+				model.addAttribute("user", user);
+				model.addAttribute("password",password);
+				model.addAttribute("userType", userType);
 				model.addAttribute("lose", "用户信息不存在");
 				return "login";
 			}
-		session.invalidate();
 		model.addAttribute("lose", "账号或密码不正确，请重新输入！");
 		return "login";
 	}
@@ -60,6 +69,5 @@ public class LoginController {
 	public String logout(HttpSession session) throws Exception {
 		session.invalidate();
 		return "redirect:/employee/employeeAllSubmit.action";
-		
 	}
 }
