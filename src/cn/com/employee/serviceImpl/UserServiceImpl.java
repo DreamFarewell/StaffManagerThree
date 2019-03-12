@@ -88,7 +88,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean judgePassword(UserCustom userCustom) throws Exception {
 		if(userCustom!=null) {
-			if(userMapper.judgeUser(userCustom.getUser(), userCustom.getUserType())>1) {
+			if(userMapper.judgeUser(userCustom.getUser(), userCustom.getUserType())>0) {
 				UserCustom user = userMapper.getUser(userCustom.getUser());
 				if(user.getUser().equals(userCustom.getUser()) && user.getUserType().equals(userCustom.getUserType()) && !user.getPassword().equals(userCustom.getPassword())) {
 					return true;
