@@ -48,7 +48,7 @@ public class Page<T> {
         this.pageSize = pageSize;
     }
     public int getTotalPage() {
-        return (int) Math.ceil((double)getTotalRecord()/getPageSize());
+        return pageNumber<=(int) Math.ceil((double)getTotalRecord()/getPageSize())?(int) Math.ceil((double)getTotalRecord()/getPageSize()):1;
     }
     public int getIndex() {
         return (getPageNumber()-1)*getPageSize();

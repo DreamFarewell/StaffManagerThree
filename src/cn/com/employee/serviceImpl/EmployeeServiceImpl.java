@@ -112,7 +112,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 		pageNo=pageNumber;
 		//获取总记录数
 		int totalRecord=employeeinformationMapperCustom.getRecordsCount();
-		if(pageNo>totalRecord/10) pageNo=1;
 		page=new Page<EmployeeinformationCustom> (pageNo,totalRecord);
 		List<EmployeeinformationCustom> list = employeeinformationMapperCustom.pageList(page.getIndex(), page.getPageSize());
 		page.setList(list);
