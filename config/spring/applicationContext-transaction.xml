@@ -11,7 +11,7 @@
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
-	<!-- 事务管理器 对mybatis操作数据库事务控制，spring使用jdbc的事务控制类 -->
+	<!-- 事务管理器对mybatis操作数据库事务控制，spring使用jdbc的事务控制类 -->
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<!-- 数据源 dataSource在applicationContext-dao.xml中配置了 -->
@@ -36,7 +36,4 @@
 		<aop:advisor advice-ref="txAdvice"
 			pointcut="execution(* cn.com.employee.service.impl.*.*(..))" />
 	</aop:config>
-
-
-
 </beans>
