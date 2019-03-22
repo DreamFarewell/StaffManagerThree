@@ -22,19 +22,21 @@ import cn.com.employee.validation.ValidGroupSequence;
 public class EmployeeController {
 	@Autowired
 	EmployeeService employeeService;
+
 	/**
 	 * 分页
 	 */
 	@RequestMapping("/employeeAllSubmit")
-	public String employeeAllSubmit(Model model,@RequestParam(value="pageNumber",defaultValue="1")int pageNumber) throws Exception {
-		Page<EmployeeinformationCustom> page =new Page<EmployeeinformationCustom>();
-		page=employeeService.getPage(pageNumber);
+	public String employeeAllSubmit(Model model, @RequestParam(value = "pageNumber", defaultValue = "1") int pageNumber)
+			throws Exception {
+		Page<EmployeeinformationCustom> page = new Page<EmployeeinformationCustom>();
+		page = employeeService.getPage(pageNumber);
 		List<EmployeeinformationCustom> list = page.getList();
-		model.addAttribute("list",list);
+		model.addAttribute("list", list);
 		model.addAttribute("page", page);
 		return "show";
 	}
-	
+
 	/**
 	 * <p>
 	 * Description: 添加员工信息提交
@@ -198,18 +200,23 @@ public class EmployeeController {
 			EmployeeinformationQueryVo employeeQueryVo = new EmployeeinformationQueryVo();
 			employeeQueryVo.setEmployeeinformationCustom(employee);
 			employeeList = employeeService.selectEmployeeList(employeeQueryVo);
-			model.addAttribute("employeeList", employeeList);
-			if(employeeList.size()<1) {
+			if (employeeList != null) {
+				model.addAttribute("employeeList", employeeList);
+				return "query";
+			} else {
 				model.addAttribute("inexistence", "您要查找的员工信息不存在，请核对后再进行查询！");
+				return "query";
 			}
-			return "query";
-		} else if (findType.trim().equals("id")) {
+
+		} else if (findType.trim().equals("id") && Integer.valueOf(value.replace("", "")) > 0) {
 			employeeForId = employeeService.selectById(Integer.valueOf(value.replace("", "")));
-			model.addAttribute("employee", employeeForId);
-			if(employeeForId.getId()==null || employeeForId.getId()<1) {
+			if (employeeForId != null) {
+				model.addAttribute("employee", employeeForId);
+				return "query";
+			} else {
 				model.addAttribute("inexistence", "您要查找的员工信息不存在，请核对后再进行查询！");
+				return "query";
 			}
-			return "query";
 		} else {
 			return "error";
 		}

@@ -120,7 +120,7 @@ body {
 		</table>
 		</c:if>
 		<c:if test="${employee!=null }">
-			<table class="table_style">
+			<table class="table_style"  align="center" width="70%">
 			<tr class="tr_h_style">
 				<th class="td_style">姓名</th>
 				<th class="td_style">性别</th>

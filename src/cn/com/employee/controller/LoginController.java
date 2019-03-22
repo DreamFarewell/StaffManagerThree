@@ -1,8 +1,5 @@
 /**
  *<p>Title:LoginController.java</p>
- *<p>Description:</p>
- *<p></p>
- *<p></p>
  *@date 2019年2月16日
  *@author 胡金光
  */

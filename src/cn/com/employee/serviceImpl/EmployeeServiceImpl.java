@@ -24,6 +24,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	private EmployeeinformationMapper employeeinformationMapper;
 	@Autowired
 	private EmployeeinformationMapperCustom employeeinformationMapperCustom;
+
 	/**
 	 * @author 胡金光 添加员工信息
 	 */
@@ -43,20 +44,29 @@ public class EmployeeServiceImpl implements EmployeeService {
 		EmployeeinformationCustom employeeinformationCustom = null;
 		if (id != null) {
 			Employeeinformation employeeinformation = employeeinformationMapper.selectByPrimaryKey(id);
-			if (employeeinformation != null) {
+			if (employeeinformation != null && employeeinformation.getName() != null) {
 				employeeinformationCustom = new EmployeeinformationCustom();
 				BeanUtils.copyProperties(employeeinformation, employeeinformationCustom);
+				return employeeinformationCustom;
+			} else {
+				return null;
 			}
 		}
-		return employeeinformationCustom;
+		return null;
 	}
+
 	/**
 	 * @author 胡金光 按照员工姓名查找员工列表
 	 */
 	@Override
 	public List<EmployeeinformationCustom> selectEmployeeList(EmployeeinformationQueryVo employeeinformationQueryVo)
 			throws Exception {
-		return employeeinformationMapperCustom.findStaff(employeeinformationQueryVo);
+		List<EmployeeinformationCustom> list = employeeinformationMapperCustom.findStaff(employeeinformationQueryVo);
+		if (!list.isEmpty()) {
+			return list;
+		} else {
+			return null;
+		}
 	}
 
 	/**
@@ -80,21 +90,23 @@ public class EmployeeServiceImpl implements EmployeeService {
 			employeeinformationMapper.deleteByPrimaryKey(id);
 		}
 	}
-	
+
 	/**
 	 * 批量删除
 	 */
 	@Override
 	public void batchDeleteEmployee(Integer[] id) throws Exception {
-			employeeinformationMapperCustom.batchDeleteEmployee(id);
+		employeeinformationMapperCustom.batchDeleteEmployee(id);
 	}
+
 	/**
 	 * 批量更新
 	 */
 	@Override
 	public void batchUpdateEmployee(EmployeeinformationQueryVo employeeinformationQueryVo) throws Exception {
-			employeeinformationMapperCustom.batchUpdateEmployee(employeeinformationQueryVo);
+		employeeinformationMapperCustom.batchUpdateEmployee(employeeinformationQueryVo);
 	}
+
 	/**
 	 * 批量更新前查询
 	 */
@@ -102,18 +114,20 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public List<EmployeeinformationCustom> batchFindUpdate(Integer[] id) throws Exception {
 		return employeeinformationMapperCustom.batchFindUpdate(id);
 	}
+
 	/**
 	 * 分页操作
 	 */
 	@Override
 	public Page<EmployeeinformationCustom> getPage(int pageNumber) throws Exception {
-		int pageNo=1;//设置默认页码，当pageNumber类型转换出错时，会起作用，否则值被覆盖
-		Page<EmployeeinformationCustom> page =null;
-		pageNo=pageNumber;
-		//获取总记录数
-		int totalRecord=employeeinformationMapperCustom.getRecordsCount();
-		page=new Page<EmployeeinformationCustom> (pageNo,totalRecord);
-		List<EmployeeinformationCustom> list = employeeinformationMapperCustom.pageList(page.getIndex(), page.getPageSize());
+		int pageNo = 1;// 设置默认页码，当pageNumber类型转换出错时，会起作用，否则值被覆盖
+		Page<EmployeeinformationCustom> page = null;
+		pageNo = pageNumber;
+		// 获取总记录数
+		int totalRecord = employeeinformationMapperCustom.getRecordsCount();
+		page = new Page<EmployeeinformationCustom>(pageNo, totalRecord);
+		List<EmployeeinformationCustom> list = employeeinformationMapperCustom.pageList(page.getIndex(),
+				page.getPageSize());
 		page.setList(list);
 		return page;
 	}
