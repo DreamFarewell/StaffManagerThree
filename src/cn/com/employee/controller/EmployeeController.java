@@ -21,7 +21,7 @@ import cn.com.employee.validation.ValidGroupSequence;
 @RequestMapping("/employee")
 public class EmployeeController {
 	@Autowired
-	EmployeeService employeeService;
+	private EmployeeService employeeService;
 
 	/**
 	 * 分页

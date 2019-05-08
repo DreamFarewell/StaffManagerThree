@@ -8,14 +8,14 @@
 .tr_h_style {
 	padding-bottom: 0px;
 	border-bottom: 1px;
-	background-image: url("/pic/tr.png");
+	background-image: url("../images/tr.png");
 }
 
 .tr_d_style {
 	border-left: 1px solid #ffffff;
 	border-top: 1px solid #ffffff;
 	border-bottom: 1px;
-	background-image: url("/pic/tr.png");
+	background-image: url("../images/tr.png");
 }
 
 .td_start_style {

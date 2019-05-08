@@ -88,6 +88,7 @@ body {
 			name="findType" value="name">员工姓名
 		</font><br /> <input type="text" name="value" />
 		<button class="page_b" onclick="select()">查找</button></div>
+		<hr width="70%">
 		<div align="right" style="padding-right: 15%;padding-bottom: 3px"><button class="page_b" onclick="index()">首页</button></div>
 		<c:if test="${not empty employeeList }"><table class="table_style" align="center" width="70%">
 			<tr class="tr_h_style">
@@ -147,7 +148,7 @@ body {
 			</tr>
 			</table>
 		</c:if>
-		<c:if test="${inexistence!=null }">${inexistence }</c:if>
+		<c:if test="${inexistence!=null }"><div style="margin-left: 15%">${inexistence }</div></c:if>
 	</form>
 </div>
 </c:if>

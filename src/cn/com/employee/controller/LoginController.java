@@ -67,6 +67,7 @@ public class LoginController {
 
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) throws Exception {
+		
 		session.invalidate();
 		return "redirect:/employee/employeeAllSubmit.action";
 	}

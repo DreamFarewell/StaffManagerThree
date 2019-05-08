@@ -14,7 +14,7 @@ form {
 }
 
 body {
-	background-image: url("/pic/bg.png");
+	background-image: url("${pageContext.request.contextPath}/images/bg.png");
 	background-position: center center;
 	background-attachment: fixed;
 	background-repeat: no-repeat;
@@ -75,7 +75,7 @@ body {
 						${lose }
 					</c:if> <span id="errorMsg"></span>
 			</font> <br /> <a onClick="valid()"><img width="auto" height="auto"
-				alt="登录" src="/pic/log.gif"></a><br />
+				alt="登录" src="${pageContext.request.contextPath}/images/log.gif"></a><br />
 		</form>
 	</center>
 </body>

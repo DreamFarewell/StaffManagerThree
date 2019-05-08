@@ -48,50 +48,6 @@ body {
 	text-decoration: none;
 }
 </style>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/js/jquery-1.4.4.min.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/js/show.js"></script>
-<script type="text/javascript">
-	function jump() {
-		var val = $("input[name=jump]").val();
-		if (val != null) {
-			$('#ct').attr('href','${pageContext.request.contextPath }/employee/employeeAllSubmit.action?pageNumber='+ val);
-		}
-		if (val == '') {
-			$('#ct').attr('href', '#');
-		}
-	}
-	function deleteEmployee() {
-		var msg = confirm("确定删除这些员工的信息吗？");
-		if (msg) {
-			document.employeeForm.action = "${pageContext.request.contextPath }/employee/employeeBatchDeleteSubmit.action";
-			document.employeeForm.submit();
-		}
-	}
-	function deleteEmployeeOne() {
-		var msg = confirm("确定删除？")
-		if (msg) {
-			return true;
-		}
-		return false;
-	}
-	function updateEmployee() {
-		var msg = confirm("确定修改这些员工的信息吗？");
-		if (msg) {
-			document.employeeForm.action = "${pageContext.request.contextPath }/employee/employeeBetchUpdatePage.action";
-			document.employeeForm.submit();
-		}
-	}
-	function insertEmployee() {
-		document.employeeForm.action = "${pageContext.request.contextPath}/jsp/insertPage.action"
-		document.empmloyeeForm.submit();
-	}
-	function selectEmployee() {
-		document.employeeForm.action = "${pageContext.request.contextPath}/jsp/queryPage.action"
-		document.empmloyeeForm.submit();
-	}
-</script>
 <title>员工基本信息管理系统</title>
 </head>
 <body>
@@ -224,7 +180,7 @@ body {
 								<td align="right"><font style="font: lighter 12px Arial;">转到</font><input
 									type="text" size="4" name="jump"
 									onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9]+/,'');}).call(this)"
-									onblur="this.v();"
+									onblur="this.v()"
 									style="height: 12px; width: 20px; border: 1px solid #999999"><font
 									style="font: lighter 12px Arial;">页</font><a id="ct" href=""
 									class="page_b" onclick="jump()">跳转</a></td>
@@ -239,4 +195,79 @@ body {
 			href="${pageContext.request.contextPath }/super/manageUser.action">返回首页</a>
 	</c:if>
 </body>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/show.js"></script>
+<script type="text/javascript">
+	function updateEmployee() {
+		var count = 0;
+		var chk = document.getElementsByName("employee_id");
+		for (var i = 0; i < chk.length; i++) {
+			if (chk[i].checked == true) {
+				count++;
+			}
+		}
+		if (count != 0) {
+			var msg = confirm("确定修改这些员工的信息吗？");
+			if (msg) {
+				document.employeeForm.action = "${pageContext.request.contextPath }/employee/employeeBetchUpdatePage.action";
+				document.employeeForm.submit();
+			}
+		} else {
+			alert("请选择！");
+		}
+	}
+
+	function deleteEmployee() {
+		var count = 0;
+		var chk = document.getElementsByName("employee_id");
+		for (var i = 0; i < chk.length; i++) {
+			if (chk[i].checked == true) {
+				count++;
+			}
+		}
+		if (count != 0) {
+			var msg = confirm("确定删除这些员工的信息吗？");
+			if (msg) {
+				document.employeeForm.action = "${pageContext.request.contextPath }/employee/employeeBatchDeleteSubmit.action";
+				document.employeeForm.submit();
+			}
+		} else {
+			alert("请选择！");
+		}
+	}
+
+	function selectEmployee() {
+		document.employeeForm.action = "${pageContext.request.contextPath}/jsp/queryPage.action"
+		document.empmloyeeForm.submit();
+	}
+
+	function jump() {
+		var val = $("input[name=jump]").val();
+		if (val != null) {
+			$('#ct')
+					.attr(
+							'href',
+							'${pageContext.request.contextPath }/employee/employeeAllSubmit.action?pageNumber='
+									+ val);
+		}
+		if (val == '') {
+			$('#ct').attr('href', '#');
+		}
+	}
+
+	function insertEmployee() {
+		document.employeeForm.action = "${pageContext.request.contextPath}/jsp/insertPage.action"
+		document.empmloyeeForm.submit();
+	}
+
+	function deleteEmployeeOne() {
+		var msg = confirm("确定删除？")
+		if (msg) {
+			return true;
+		}
+		return false;
+	}
+</script>
 </html>
